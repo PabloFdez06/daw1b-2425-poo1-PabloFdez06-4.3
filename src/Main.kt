@@ -12,17 +12,17 @@ fun main() {
     print("Introduce el nombre de la persona 1: ")
     val nombreUs = readln()
     persona1.nombre = nombreUs
-    println("La persona llamada ${persona1.nombre}, pesa ${ persona1.peso } kilos, y mide ${"%2f".format (persona1.altura) }metros")
+    println("La persona llamada ${persona1.nombre}, pesa ${ persona1.peso } kilos, y mide ${"%.2f".format (persona1.altura) }metros")
 
     println("-------------------------")
 
     println("--SOBRE LA PERSONA 3--")
 
-    println("La persona llamada 3, pesa ${persona3.peso}kg, mide ${persona3.altura} y tiene un indice de masa corporal de ${"%2f".format(persona3.calcularIMC())}%")
+    println("La persona llamada 3, pesa ${persona3.peso}kg, mide ${persona3.altura} y tiene un indice de masa corporal de ${"%.2f".format(persona3.calcularIMC())}%")
     print("Modifica la altura del usuario: ")
     val modAltura = readln().toDouble()
     persona3.altura = modAltura
-    println("La persona llamada 3, pesa ${persona3.peso}kg, mide ${persona3.altura} y tiene un indice de masa corporal de ${"%2f".format(persona3.calcularIMC())}%")
+    println("La persona llamada 3, pesa ${persona3.peso}kg, mide ${persona3.altura} y tiene un indice de masa corporal de ${"%.2f".format(persona3.calcularIMC())}%")
 
     println("--SOBRE LA PERSONA 3--")
 

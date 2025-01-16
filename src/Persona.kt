@@ -3,20 +3,37 @@ class Persona(var peso: Double, var altura: Double) {
 
     fun saludar():String = "Saludos ${nombre}"
 
-/*    fun alturaEncimaMedia() { // preguntar si en caso de que sea por debajo de la media se haria con if else, y si es correcto hacerlo con require o debe ser una funcion.
-        if (altura >= 1.75){
-            print("(por encima de la media)")
-        }else{
-            print("(por debajo de la media)")
+    private fun alturaEncimaMedia() : Boolean { // preguntar si en caso de que sea por debajo de la media se haria con if else, y si es correcto hacerlo con require o debe ser una funcion.
+        if (altura >= ALTURA_MEDIA) {
+            return true
+        } else {
+            return false
         }
-    }*/
-
-    init {
-        require(altura >= 1.75){"(por encima de la media)"}
-        require(peso >= 70){"(por encima de la media)"}
     }
 
-    fun pesoEncimaMedia():Boolean = peso >= 70
+    private fun pesoEncimaMedia():Boolean {
+        if (peso >= PESO_MEDIO){
+            return true
+        }else{
+            return false
+        }
+    }
+
+    private fun estadoImc() : String {
+        var imc: Double = calcularIMC()
+        return when {
+            imc < 18.5 -> "peso insuficiente"
+            imc in 18.5..24.9 -> "peso saludable"
+            imc in 25.0..29.9 -> "sobrepeso"
+            else -> "obesidad"
+        }
+    }
+
+    companion object{
+        const val ALTURA_MEDIA = 1.75
+        const val PESO_MEDIO = 70.0
+    }
+
 
     var nombre: String? = "Desconocido"
     constructor(nombre: String, peso: Double, altura: Double): this(peso, altura){
@@ -24,7 +41,7 @@ class Persona(var peso: Double, var altura: Double) {
     }
 
     override fun toString(): String {
-        return "La persona llamada ${nombre}, con un peso de ${peso} y una altura de ${ altura}. Tiene un IMC de ${"%.2f".format (calcularIMC())}"
+        return "${nombre} con una altura de ${altura} (${if (alturaEncimaMedia()) {"Altura por encima de la media"}else{"Altura por debajo de la media"}}) y un peso de ${peso}kg (${if (pesoEncimaMedia()) {"Peso por encima de la media"}else{"Peso por debajo de la media"}}). Tiene un IMC de ${"%.2f".format (calcularIMC())} (${(estadoImc())})"
     }
 
     override fun equals(other: Any?): Boolean {
